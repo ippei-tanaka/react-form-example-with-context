@@ -5,7 +5,7 @@ import pickBy from 'lodash/pickBy';
 
 const ValuesContext = createContext({});
 const ErrorsContext = createContext({});
-const SetValueContext = createContext({});
+const SetValueContext = createContext(() => {});
 
 export const FormConsumer = ({children}) => {
     return (
