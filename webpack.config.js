@@ -1,22 +1,24 @@
 const path = require('path');
 const SRC_DIR = path.resolve(__dirname, './src');
+const DEVELOPMENT_SRC_DIR = path.resolve(__dirname, './development/src');
+const DEVELOPMENT_BUILD_DIR = path.resolve(__dirname, './development/build');
 const MODULES_DIR = path.resolve(__dirname, './node_modules');
 
 module.exports = {
 
     entry: {
-        app: SRC_DIR + '/index'
+        app: DEVELOPMENT_SRC_DIR
     },
 
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: DEVELOPMENT_BUILD_DIR
     },
 
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
-                include: [SRC_DIR],
+                include: [DEVELOPMENT_SRC_DIR, SRC_DIR],
                 loader: 'babel-loader',
             },
         ],
@@ -24,9 +26,16 @@ module.exports = {
 
     resolve: {
         extensions: ['.js', '.json', '.jsx'],
-        modules: [SRC_DIR, MODULES_DIR],
+        modules: [DEVELOPMENT_SRC_DIR, MODULES_DIR],
         alias: {
             '@': path.resolve(__dirname, 'src'),
         },
     },
+
+    devServer: {
+        contentBase: DEVELOPMENT_BUILD_DIR,
+        historyApiFallback: true,
+    },
+
+    mode: 'development',
 };
