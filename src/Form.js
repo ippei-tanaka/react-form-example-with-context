@@ -61,12 +61,12 @@ class Form extends Component {
 
     _setValue (name, value)
     {
-        this.setState(state => {
-            state.values = {
-                ...state.values,
+        const values = this.state.values;
+        this.setState({
+            values: {
+                ...values,
                 [name]: value
-            };
-            return state;
+            }
         });
     }
 
